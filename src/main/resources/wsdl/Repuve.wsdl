@@ -1,0 +1,48 @@
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:tns="http://itq.com/parking/consultaRepuve"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             targetNamespace="http://itq.com/parking/consultaRepuve"
+             name="RepuveService">
+
+  <types>
+    <xs:schema>
+      <xs:import namespace="http://itq.com/parking/consultaRepuve" schemaLocation="Repuve.xsd"/>
+    </xs:schema>
+  </types>
+
+  <message name="ConsultarVehiculoRequest">
+    <part name="parameters" element="tns:ConsultarVehiculoRequest"/>
+  </message>
+
+  <message name="ConsultarVehiculoResponse">
+    <part name="usuario" element="tns:EstadoVehiculo"/>
+  </message>
+
+  <portType name="RepuveServicePortType">
+    <operation name="ConsultarVehiculo">
+      <input message="tns:ConsultarVehiculoRequest"/>
+      <output message="tns:ConsultarVehiculoResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="RepuveServiceBinding" type="tns:RepuveServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="ConsultarVehiculo">
+      <soap:operation soapAction="ConsultarVehiculo"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="RepuveService">
+    <port name="RepuveServicePort" binding="tns:RepuveServiceBinding">
+      <soap:address location="http://10.12.40.11:8081/ws/"/>
+    </port>
+  </service>
+
+</definitions>

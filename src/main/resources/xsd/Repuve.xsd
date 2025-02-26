@@ -1,0 +1,56 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://itq.com/parking/consultaRepuve"
+    xmlns="http://itq.com/parking/consultaRepuve"
+    elementFormDefault="qualified">
+
+<xs:element name="EstadoVehiculo">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="placa" type="TipoPlaca" minOccurs="1" maxOccurs="1" />
+            <xs:element name="modelo" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="marca" type="xs:string" minOccurs="0" />
+            <xs:element name="reporteRobo" type="xs:boolean" />
+            <xs:element name="niv" type="xs:string" />
+            <xs:element name="nci" type="xs:string" minOccurs="0" />
+            <xs:element name="ejes" type="xs:integer" minOccurs="0" />
+            <xs:element name="tipo" type="xs:string" minOccurs="0" />
+            <xs:element name="clase" type="xs:string" minOccurs="0" />
+            <xs:element name="version" type="xs:string" minOccurs="0" />
+            <xs:element name="cilindros" type="xs:string" minOccurs="0" />
+            <xs:element name="anio_modelo" type="xs:integer" minOccurs="0" />
+            <xs:element name="institucion" type="xs:string" minOccurs="0" />
+            <xs:element name="pais_origen" type="xs:string" minOccurs="0" />
+            <xs:element name="desplazamiento" type="xs:string" minOccurs="0" />
+            <xs:element name="numero_puertas" type="xs:integer" minOccurs="0" />
+            <xs:element name="fecha_emplacado" type="xs:date" minOccurs="0" />
+            <xs:element name="reporte_usa_can" type="xs:boolean" minOccurs="0" />
+            <xs:element name="hora_inscripcion" type="xs:time" minOccurs="0" />
+            <xs:element name="entidad_emplacado" type="xs:string" minOccurs="0" />
+            <xs:element name="fecha_inscripcion" type="xs:date" minOccurs="0" />
+            <xs:element name="folio_inscripcion" type="xs:string" minOccurs="0" />
+            <xs:element name="planta_ensamblaje" type="xs:string" minOccurs="0" />
+            <xs:element name="reporte_robo_ocra" type="xs:boolean" minOccurs="0" />
+            <xs:element name="datos_complementarios" type="xs:string" minOccurs="0" />
+            <xs:element name="reporte_robo_procuraduria" type="xs:boolean" minOccurs="0" />
+            <xs:element name="fecha_ultima_actualizacion" type="xs:date" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+
+
+    <xs:element name="ConsultarVehiculoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="placa" type="TipoPlaca" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="TipoPlaca">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{5,7}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
