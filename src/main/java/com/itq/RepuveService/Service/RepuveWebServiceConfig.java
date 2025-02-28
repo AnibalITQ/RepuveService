@@ -21,19 +21,30 @@ public class RepuveWebServiceConfig {
 		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
 		servlet.setApplicationContext(applicationContext);
 		servlet.setTransformWsdlLocations(true);
-		return new ServletRegistrationBean<>(servlet, "/ws/*");
+
+		ServletRegistrationBean<MessageDispatcherServlet> registration = new ServletRegistrationBean<>(servlet, "/ws/*");
+		registration.setName("messageDispatcherServlet");
+		registration.setLoadOnStartup(1);
+		registration.setOrder(1);
+		return registration;
 	}
 	
-	@Bean(name = "consultaRepuve")
+	@Bean(name = "Repuve")
 	public Wsdl11Definition defaultWsdl11Definition() {
 		SimpleWsdl11Definition wsdl11Definition = new SimpleWsdl11Definition();
-		wsdl11Definition.setWsdl(new ClassPathResource("wsdl/servicioTaller.wsdl"));
+		ClassPathResource wsdlResource = new ClassPathResource("wsdl/Repuve.wsdl");
+		if (wsdlResource.exists()) {
+			System.out.println("El archivo WSDL se encuentra en la ruta: " + wsdlResource.getPath());
+		} else {
+			System.out.println("El archivo WSDL no se encuentra en la ruta especificada.");
+		}
+		wsdl11Definition.setWsdl(wsdlResource);
 		return wsdl11Definition;
 	}
 	
 	@Bean (name = "repuve")
 	public XsdSchema tallerSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("xsd/taller.xsd"));
+		return new SimpleXsdSchema(new ClassPathResource("xsd/Repuve.xsd"));
 	}
 
 }
